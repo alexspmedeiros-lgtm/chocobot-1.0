@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#51262f">
+<title>ChocoBot | Espetinhos de Frutas</title>
+<style>
+:root{--choc:#51262f;--pink:#e04a78;--cream:#fffaf5;--paper:#fff;--muted:#71666b;--line:#f1dfe1;--green:#16834d}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(165deg,#fff0f1,#fffaf5 58%,#f9f2e8);color:var(--choc);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:540px;margin:auto;padding:17px 16px 130px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.11em;font-weight:800;color:#b83e66}.hero{padding:20px 0 12px;text-align:center}.hero h1{font-size:clamp(30px,8vw,42px);letter-spacing:-1.5px;margin:3px 0}.hero p{color:var(--muted);margin:6px 0 0;font-size:14px}.robot{width:94px;height:94px;display:grid;place-items:center;margin:auto;border-radius:27px;background:#ffe5eb;border:3px solid #eac0cb;box-shadow:0 9px 22px #51262f12;font-size:52px}.bubble{background:#fff;border:1px solid var(--line);border-radius:19px 19px 19px 5px;padding:17px 18px;box-shadow:0 5px 20px #51262f0b;margin:16px 0 23px;line-height:1.48;font-size:15px}.bubble strong{color:var(--pink)}h2{font-size:21px;letter-spacing:-.6px;margin:20px 0 12px}h2 span{font-size:13px;color:#a08589;font-weight:500}.product{display:flex;align-items:center;gap:12px;padding:15px;background:var(--paper);border:1px solid var(--line);border-radius:17px;margin-bottom:11px;box-shadow:0 4px 15px #51262f06}.emoji{display:grid;place-items:center;min-width:60px;height:60px;border-radius:16px;background:#fff0f3;font-size:31px}.product-info{flex:1;min-width:0}.product-info strong{display:block;font-size:15px}.product-info small{color:var(--muted);display:block;font-size:12px;margin-top:3px}.product-info b{font-size:15px;color:#b52f5a;display:block;margin-top:7px}.counter{display:flex;gap:10px;align-items:center}.counter button{border:0;border-radius:50%;background:#ffe5ed;color:#9c2f51;width:31px;height:31px;font-size:21px;cursor:pointer}.counter button:focus-visible,.checkout:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #eaa1b7;outline-offset:2px}.counter output{font-weight:750;min-width:13px;text-align:center}.section{padding:18px;background:#fff;border-radius:19px;border:1px solid var(--line);margin-top:20px}label{font-weight:750;font-size:13px;display:block;margin-bottom:7px}input,textarea,select{width:100%;padding:12px 13px;border:1.5px solid #e7d4d9;border-radius:11px;font:inherit;background:white;color:var(--choc)}textarea{resize:vertical;min-height:70px} .field{margin-bottom:14px}.field:last-child{margin:0}.footnote{font-size:12px;color:var(--muted);line-height:1.5;margin:14px 0}.demo{border:1px dashed #d98aa4;border-radius:12px;padding:10px 12px;background:#fff2f6;font-size:12px;color:#8a3454;margin:10px 0}.bar{position:fixed;bottom:0;left:0;right:0;background:#fff;box-shadow:0 -9px 35px #51262f1c;padding:13px max(16px,calc((100vw - 508px)/2));z-index:2}.totals{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px}.totals b{font-size:21px}.checkout{background:#16834d;color:#fff;border:0;padding:15px 14px;border-radius:13px;font-weight:800;width:100%;font-size:15px;cursor:pointer}.checkout:disabled{cursor:not-allowed;background:#aac2b3}.toast{display:none;margin-top:11px;color:#962c46;font-size:13px;background:#fff0f3;padding:12px;border-radius:10px}.toast.show{display:block}.config{margin-top:22px;font-size:13px;background:#fff7dd;border:1px solid #f1dfa4;padding:15px;border-radius:12px;color:#654e24}.config summary{font-weight:800;cursor:pointer}.config code{background:#f9eab8;padding:1px 3px;border-radius:3px}.config p{line-height:1.5}.badge{display:inline-block;background:#fff1f5;border-radius:100px;padding:6px 12px;font-size:12px;font-weight:750;color:#b12c54;margin-top:10px}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+<div class="robot" role="img" aria-label="Robô virtual vendedor">🤖</div>
+<div class="badge">🍇 🍓 Frutinhas com chocolate 🍫</div>
+<h1>Olá, sou o <span style="color:var(--pink)">ChocoBot!</span></h1>
+<p>Seu assistente virtual de pedidos da feira.</p>
+</header>
+<section class="bubble" id="bot-text" aria-live="polite"><strong>Bip-bip! 👋</strong> Seja bem-vindo! Escolha seus espetinhos abaixo. Eu monto o pedido e preparo tudo para você enviar à nossa equipe pelo WhatsApp!</section>
+<section aria-labelledby="menu-title">
+<h2 id="menu-title">Nosso cardápio <span>Escolha quantos quiser</span></h2>
+<div id="products"></div>
+</section>
+<section class="section" aria-labelledby="data-title">
+<h2 id="data-title" style="margin-top:0">Identificação do pedido</h2>
+<div class="field"><label for="name">Seu primeiro nome *</label><input id="name" maxlength="35" autocomplete="given-name" placeholder="Como podemos chamar você?"></div>
+<div class="field"><label for="payment">Forma de pagamento</label><select id="payment"><option>Pix na retirada</option><option>Dinheiro na retirada</option></select></div>
+<div class="field"><label for="notes">Observações (opcional)</label><textarea id="notes" maxlength="170" placeholder="Ex.: retirar o pedido em alguns minutos"></textarea></div>
+</section>
+<div class="demo"><strong>Modelo demonstrativo:</strong> os preços são exemplos. É necessário configurar o número do WhatsApp e os preços reais antes de divulgar o QR Code.</div>
+<p class="footnote">O pedido só será confirmado quando você tocar em <strong>Enviar</strong> no WhatsApp. O pagamento acontece na retirada. Produtos com chocolate podem conter leite e outros alérgenos: consulte a equipe.</p>
+<details class="config"><summary>⚙️ Instruções de configuração para a equipe</summary><p>Abra este arquivo em um editor de texto e procure por <code>CONFIG.whatsapp</code>. Insira o telefone da equipe com DDI 55 e DDD, apenas números, por exemplo: <code>5599999999999</code> (exemplo fictício). Ajuste também os preços e descrições em <code>CONFIG.produtos</code>. Salve o arquivo como <code>index.html</code> e publique-o em um serviço de hospedagem de páginas estáticas, como o GitHub Pages.</p></details>
+<div class="toast" id="error" role="alert"></div>
+</main>
+<footer class="bar">
+<div class="totals"><span id="items">0 espetinhos selecionados</span><b id="total">R$ 0,00</b></div>
+<button class="checkout" id="checkout" type="button">📲 Finalizar pedido no WhatsApp</button>
+</footer>
+<script>
+/* CONFIGURAÇÃO DA EQUIPE — EDITE ESTES DADOS ANTES DA FEIRA */
+const CONFIG = {
+  whatsapp: "", // Exemplo de formato: "5584999999999" — use o número REAL da equipe.
+  produtos: [
+    { nome: "Morango com chocolate", emoji: "🍓", descricao: "Espetinho de morangos banhados no chocolate", preco: 7.00 },
+    { nome: "Uva com chocolate", emoji: "🍇", descricao: "Espetinho de uvas banhadas no chocolate", preco: 6.00 },
+    { nome: "Misto com chocolate", emoji: "🍓🍇", descricao: "Morango e uva no mesmo espetinho", preco: 8.00 }
+  ]
+};
+const carrinho = CONFIG.produtos.map(() => 0);
+const dinheiro = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const container = document.getElementById('products');
+const bot = document.getElementById('bot-text');
+const erro = document.getElementById('error');
+function mostrarErro(msg){erro.textContent=msg;erro.classList.add('show');erro.scrollIntoView({behavior:'smooth',block:'nearest'})}
+function redesenhar(){
+  container.innerHTML = CONFIG.produtos.map((p,i)=>`<article class="product"><div class="emoji" aria-hidden="true">${p.emoji}</div><div class="product-info"><strong>${p.nome}</strong><small>${p.descricao}</small><b>${dinheiro(p.preco)}</b></div><div class="counter"><button aria-label="Remover um ${p.nome}" data-i="${i}" data-dir="-1">−</button><output aria-label="Quantidade">${carrinho[i]}</output><button aria-label="Adicionar um ${p.nome}" data-i="${i}" data-dir="1">+</button></div></article>`).join('');
+  const quantidade = carrinho.reduce((a,b)=>a+b,0);
+  const total = carrinho.reduce((a,b,i)=>a+b*CONFIG.produtos[i].preco,0);
+  document.getElementById('items').textContent = `${quantidade} espetinho${quantidade===1?'':'s'} selecionado${quantidade===1?'':'s'}`;
+  document.getElementById('total').textContent = dinheiro(total);
+  if(quantidade)bot.innerHTML=`<strong>Ótima escolha! 😋</strong> Já anotei ${quantidade} espetinho${quantidade===1?'':'s'} no seu pedido. O total agora é <strong>${dinheiro(total)}</strong>. Preencha seu nome e finalize quando quiser!`;
+  else bot.innerHTML='<strong>Bip-bip! 👋</strong> Seja bem-vindo! Escolha seus espetinhos abaixo. Eu monto o pedido e preparo tudo para você enviar à nossa equipe pelo WhatsApp!';
+}
+container.addEventListener('click', e=>{const b=e.target.closest('button[data-i]');if(!b)return;const i=Number(b.dataset.i),dir=Number(b.dataset.dir);carrinho[i]=Math.max(0,Math.min(30,carrinho[i]+dir));erro.classList.remove('show');redesenhar()});
+document.getElementById('checkout').addEventListener('click',()=>{
+  erro.classList.remove('show');
+  const escolhido = carrinho.reduce((a,b)=>a+b,0);
+  const nome = document.getElementById('name').value.trim();
+  if(!escolhido){mostrarErro('O ChocoBot pede que você escolha pelo menos um espetinho. 🍓');return}
+  if(!nome){mostrarErro('Qual é seu primeiro nome? Preencha esse campo antes de continuar.');document.getElementById('name').focus();return}
+  if(!/^55\d{10,11}$/.test(CONFIG.whatsapp)){mostrarErro('O WhatsApp da equipe ainda não foi configurado. Peça ao responsável para editar CONFIG.whatsapp no arquivo HTML.');return}
+  const linhas=CONFIG.produtos.map((p,i)=>carrinho[i]?`• ${carrinho[i]}x ${p.nome} — ${dinheiro(carrinho[i]*p.preco)}`:null).filter(Boolean);
+  const total = carrinho.reduce((a,b,i)=>a+b*CONFIG.produtos[i].preco,0);
+  const pagamento = document.getElementById('payment').value;
+  const obs = document.getElementById('notes').value.trim();
+  const texto = ['🤖 *NOVO PEDIDO — CHOCOBOT*',`*Cliente:* ${nome}`,'',...linhas,'',`*Total:* ${dinheiro(total)}`,`*Pagamento:* ${pagamento}`,obs?`*Observações:* ${obs}`:'','', '✅ Pedido sujeito à confirmação da equipe.'].filter(s=>s!==null&&s!==undefined).join('\n');
+  bot.innerHTML='<strong>Pedido preparado! 🎉</strong> Agora toque em <strong>Enviar</strong> na conversa do WhatsApp para nossa equipe recebê-lo.';
+  window.location.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`;
+});
+redesenhar();
+</script>
+</body>
+</html>
